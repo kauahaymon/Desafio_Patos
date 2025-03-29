@@ -1,0 +1,22 @@
+services:
+  postgres:
+    container_name: postgres_patos
+    image: postgres
+    environment:
+      POSTGRES_DB: patos_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+networks:
+  spring-network:
+    driver: bridge
+volumes:
+  postgres:
+    driver: local
