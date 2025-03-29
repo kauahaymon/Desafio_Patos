@@ -1,3 +1,15 @@
 spring:
   application:
   name: Desafio Patos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/patos_database
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+    database: postgresql
