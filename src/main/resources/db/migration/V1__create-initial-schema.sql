@@ -35,5 +35,6 @@ CREATE TABLE venda_pato (
     id SERIAL PRIMARY KEY,
     id_venda INTEGER NOT NULL REFERENCES vendas(id),
     id_pato INTEGER NOT NULL REFERENCES patos(id),
+    preco_unitario DECIMAL(10,2) NOT NULL,
     UNIQUE(id_pato)
 );

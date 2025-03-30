@@ -3,6 +3,8 @@ package dev.haymon.desafiopatos.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Entity
@@ -21,4 +23,6 @@ public class VendaPato {
     @OneToOne
     @JoinColumn(name = "id_pato", unique = true)
     private Pato pato;
+
+    private BigDecimal precoUnitario;
 }
