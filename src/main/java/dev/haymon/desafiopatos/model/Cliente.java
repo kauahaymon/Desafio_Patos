@@ -16,5 +16,5 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private boolean elegivelDesconto;
+    private boolean elegivelParaDesconto;
 }

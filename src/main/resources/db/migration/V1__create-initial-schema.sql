@@ -18,7 +18,7 @@ CREATE TABLE vendedores (
 CREATE TABLE clientes (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    elegivel_desconto BOOLEAN DEFAULT FALSE
+    elegivel_para_desconto BOOLEAN DEFAULT FALSE
 );
 
 -- Tabela de Vendas
