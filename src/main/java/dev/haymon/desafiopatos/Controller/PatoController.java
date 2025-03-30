@@ -40,7 +40,8 @@ public class PatoController {
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<?> delete (@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
