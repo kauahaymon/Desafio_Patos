@@ -4,6 +4,7 @@ import dev.haymon.desafiopatos.controller.dto.PatoVendidoResponse;
 import dev.haymon.desafiopatos.controller.dto.RankingVendedoresResponse;
 import dev.haymon.desafiopatos.controller.dto.RegistrarVendaRequest;
 import dev.haymon.desafiopatos.service.VendaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class VendaController {
     private final VendaService service;
 
     @PostMapping
-    public ResponseEntity<?> registrar(@RequestBody RegistrarVendaRequest dto) {
+    public ResponseEntity<?> registrar(@RequestBody @Valid RegistrarVendaRequest dto) {
         service.registrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

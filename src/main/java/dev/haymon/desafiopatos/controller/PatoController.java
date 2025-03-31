@@ -5,6 +5,7 @@ import dev.haymon.desafiopatos.controller.dto.CadastroPatoRequest;
 import dev.haymon.desafiopatos.controller.dto.PatoResponse;
 import dev.haymon.desafiopatos.controller.mapper.PatoMapper;
 import dev.haymon.desafiopatos.service.PatoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PatoController {
     private final PatoMapper mapper;
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody CadastroPatoRequest dto) {
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid CadastroPatoRequest dto) {
         service.cadastrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build(); /// uri location
     }
@@ -34,7 +35,7 @@ public class PatoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(
             @PathVariable Long id,
-            @RequestBody AtualizarPatoRequest dto
+            @RequestBody @Valid AtualizarPatoRequest dto
     ) {
         service.atualizar(id, dto);
         return ResponseEntity.noContent().build();

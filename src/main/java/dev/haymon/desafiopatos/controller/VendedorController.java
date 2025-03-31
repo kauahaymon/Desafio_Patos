@@ -4,6 +4,7 @@ import dev.haymon.desafiopatos.controller.dto.VendedorRequest;
 import dev.haymon.desafiopatos.controller.dto.VendedorResponse;
 import dev.haymon.desafiopatos.controller.mapper.VendedorMapper;
 import dev.haymon.desafiopatos.service.VendedorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class VendedorController {
     private final VendedorMapper mapper;
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody VendedorRequest dto) {
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid VendedorRequest dto) {
         service.cadastrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -41,7 +42,7 @@ public class VendedorController {
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(
             @PathVariable Long id,
-            @RequestBody VendedorRequest dto
+            @RequestBody @Valid VendedorRequest dto
     ) {
         service.atualizar(id, dto);
         return ResponseEntity.noContent().build();
