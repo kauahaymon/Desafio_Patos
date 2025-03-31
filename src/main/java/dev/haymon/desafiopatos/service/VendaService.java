@@ -1,6 +1,7 @@
 package dev.haymon.desafiopatos.service;
 
 import dev.haymon.desafiopatos.Controller.dto.PatoVendidoResponse;
+import dev.haymon.desafiopatos.Controller.dto.RankingVendedoresResponse;
 import dev.haymon.desafiopatos.Controller.dto.RegistrarVendaRequest;
 import dev.haymon.desafiopatos.model.*;
 import dev.haymon.desafiopatos.repository.*;
@@ -9,8 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static dev.haymon.desafiopatos.model.enums.DescontoClienteEnum.DESCONTO_CLIENTE;
 
@@ -93,5 +98,60 @@ public class VendaService {
             patosVendidos.add(patoVendido);
         }
         return patosVendidos;
+    }
+
+    public List<RankingVendedoresResponse> obterRankingVendedores(
+            LocalDate dataInicio,
+            LocalDate dataFim
+    ) {
+        LocalDateTime inicio = getInicioDoDia(dataInicio);
+        LocalDateTime fim = getFimDoDia(dataFim);
+
+        List<Venda> vendas = (inicio != null && fim != null)
+                ? vendaRepository.findByDataVendaBetween(inicio, fim)
+                : vendaRepository.findAll();
+
+        Map<Long, RankingVendedoresResponse> vendedorMap = new HashMap<>();
+        for (Venda venda: vendas) {
+            Vendedor vendedor = venda.getVendedor();
+            Long vendedorId = venda.getVendedor().getId();
+
+            var vendedorResponse = RankingVendedoresResponse.builder()
+                    .vendedorId(vendedorId)
+                    .nome(vendedor.getNome())
+                    .totalDeVendas(0)
+                    .patosVendidos(0)
+                    .valorTotalVendido(BigDecimal.ZERO)
+                    .build();
+
+            vendedorMap.putIfAbsent(vendedorId, vendedorResponse);
+            var vendedorRanking = vendedorMap.get(vendedorId);
+
+            BigDecimal valorVenda = venda.getValorTotal();
+            int patosVendidos = venda.getPatos().size();
+
+            vendedorRanking.setTotalDeVendas(vendedorRanking.getTotalDeVendas() + 1);
+            vendedorRanking.setPatosVendidos(vendedorRanking.getPatosVendidos() + patosVendidos);
+            vendedorRanking.setValorTotalVendido(vendedorRanking.getValorTotalVendido().add(valorVenda));
+        }
+
+        List<RankingVendedoresResponse> vendedores = new ArrayList<>(vendedorMap.values());
+        vendedores.sort((
+                (o1, o2) -> o2.getValorTotalVendido()
+                .compareTo(o1.getValorTotalVendido())
+        ));
+
+        for (int i = 0; i < vendedores.size(); i++) {
+            vendedores.get(i).setLugar(i + 1);
+        }
+        return vendedores;
+    }
+
+    private static LocalDateTime getFimDoDia(LocalDate dataFim) {
+        return dataFim != null ? dataFim.atTime(23, 59, 59) : null;
+    }
+
+    private static LocalDateTime getInicioDoDia(LocalDate dataInicio) {
+        return dataInicio != null ? dataInicio.atStartOfDay() : null;
     }
 }
