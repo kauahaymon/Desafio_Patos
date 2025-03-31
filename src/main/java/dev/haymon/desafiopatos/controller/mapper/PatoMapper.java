@@ -1,6 +1,6 @@
-package dev.haymon.desafiopatos.Controller.mapper;
+package dev.haymon.desafiopatos.controller.mapper;
 
-import dev.haymon.desafiopatos.Controller.dto.PatoResponse;
+import dev.haymon.desafiopatos.controller.dto.PatoResponse;
 import dev.haymon.desafiopatos.model.Pato;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package dev.haymon.desafiopatos.Controller.dto;
+package dev.haymon.desafiopatos.controller.dto;
 
 import lombok.Builder;
 import lombok.Getter;

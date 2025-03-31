@@ -1,8 +1,8 @@
-package dev.haymon.desafiopatos.Controller;
+package dev.haymon.desafiopatos.controller;
 
-import dev.haymon.desafiopatos.Controller.dto.PatoVendidoResponse;
-import dev.haymon.desafiopatos.Controller.dto.RankingVendedoresResponse;
-import dev.haymon.desafiopatos.Controller.dto.RegistrarVendaRequest;
+import dev.haymon.desafiopatos.controller.dto.PatoVendidoResponse;
+import dev.haymon.desafiopatos.controller.dto.RankingVendedoresResponse;
+import dev.haymon.desafiopatos.controller.dto.RegistrarVendaRequest;
 import dev.haymon.desafiopatos.service.VendaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

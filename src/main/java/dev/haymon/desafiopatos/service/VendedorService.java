@@ -1,6 +1,6 @@
 package dev.haymon.desafiopatos.service;
 
-import dev.haymon.desafiopatos.Controller.dto.VendedorRequest;
+import dev.haymon.desafiopatos.controller.dto.VendedorRequest;
 import dev.haymon.desafiopatos.model.Vendedor;
 import dev.haymon.desafiopatos.repository.VendedorRepository;
 import lombok.RequiredArgsConstructor;

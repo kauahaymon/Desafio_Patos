@@ -1,8 +1,8 @@
 package dev.haymon.desafiopatos.service;
 
-import dev.haymon.desafiopatos.Controller.dto.PatoVendidoResponse;
-import dev.haymon.desafiopatos.Controller.dto.RankingVendedoresResponse;
-import dev.haymon.desafiopatos.Controller.dto.RegistrarVendaRequest;
+import dev.haymon.desafiopatos.controller.dto.PatoVendidoResponse;
+import dev.haymon.desafiopatos.controller.dto.RankingVendedoresResponse;
+import dev.haymon.desafiopatos.controller.dto.RegistrarVendaRequest;
 import dev.haymon.desafiopatos.model.*;
 import dev.haymon.desafiopatos.repository.*;
 import lombok.RequiredArgsConstructor;

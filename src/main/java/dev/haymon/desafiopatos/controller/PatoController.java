@@ -1,9 +1,9 @@
-package dev.haymon.desafiopatos.Controller;
+package dev.haymon.desafiopatos.controller;
 
-import dev.haymon.desafiopatos.Controller.dto.AtualizarPatoRequest;
-import dev.haymon.desafiopatos.Controller.dto.CadastroPatoRequest;
-import dev.haymon.desafiopatos.Controller.dto.PatoResponse;
-import dev.haymon.desafiopatos.Controller.mapper.PatoMapper;
+import dev.haymon.desafiopatos.controller.dto.AtualizarPatoRequest;
+import dev.haymon.desafiopatos.controller.dto.CadastroPatoRequest;
+import dev.haymon.desafiopatos.controller.dto.PatoResponse;
+import dev.haymon.desafiopatos.controller.mapper.PatoMapper;
 import dev.haymon.desafiopatos.service.PatoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

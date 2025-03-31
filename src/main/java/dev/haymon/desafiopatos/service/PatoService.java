@@ -1,7 +1,7 @@
 package dev.haymon.desafiopatos.service;
 
-import dev.haymon.desafiopatos.Controller.dto.AtualizarPatoRequest;
-import dev.haymon.desafiopatos.Controller.dto.CadastroPatoRequest;
+import dev.haymon.desafiopatos.controller.dto.AtualizarPatoRequest;
+import dev.haymon.desafiopatos.controller.dto.CadastroPatoRequest;
 import dev.haymon.desafiopatos.model.Pato;
 import dev.haymon.desafiopatos.repository.PatoRepository;
 import lombok.RequiredArgsConstructor;

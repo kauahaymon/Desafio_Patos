@@ -1,6 +1,6 @@
-package dev.haymon.desafiopatos.Controller;
+package dev.haymon.desafiopatos.controller;
 
-import dev.haymon.desafiopatos.Controller.dto.ClienteRequest;
+import dev.haymon.desafiopatos.controller.dto.ClienteRequest;
 import dev.haymon.desafiopatos.model.Cliente;
 import dev.haymon.desafiopatos.service.ClienteService;
 import lombok.RequiredArgsConstructor;

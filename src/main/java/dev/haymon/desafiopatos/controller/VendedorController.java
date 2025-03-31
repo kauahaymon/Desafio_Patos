@@ -1,8 +1,8 @@
-package dev.haymon.desafiopatos.Controller;
+package dev.haymon.desafiopatos.controller;
 
-import dev.haymon.desafiopatos.Controller.dto.VendedorRequest;
-import dev.haymon.desafiopatos.Controller.dto.VendedorResponse;
-import dev.haymon.desafiopatos.Controller.mapper.VendedorMapper;
+import dev.haymon.desafiopatos.controller.dto.VendedorRequest;
+import dev.haymon.desafiopatos.controller.dto.VendedorResponse;
+import dev.haymon.desafiopatos.controller.mapper.VendedorMapper;
 import dev.haymon.desafiopatos.service.VendedorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
