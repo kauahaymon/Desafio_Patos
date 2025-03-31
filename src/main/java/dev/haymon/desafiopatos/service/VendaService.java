@@ -1,5 +1,6 @@
 package dev.haymon.desafiopatos.service;
 
+import dev.haymon.desafiopatos.Controller.dto.PatoVendidoResponse;
 import dev.haymon.desafiopatos.Controller.dto.RegistrarVendaRequest;
 import dev.haymon.desafiopatos.model.*;
 import dev.haymon.desafiopatos.repository.*;
@@ -71,5 +72,26 @@ public class VendaService {
 
         patoRepository.saveAll(patos);
         vendaRepository.save(novaVenda);
+    }
+
+    public List<PatoVendidoResponse> listarPatosVendidos() {
+        List<VendaPato> vendas = vendaPatoRepository.findAll();
+
+        List<PatoVendidoResponse> patosVendidos = new ArrayList<>();
+        for (VendaPato vendaPato: vendas) {
+            BigDecimal preco = vendaPato.getPrecoUnitario();
+            Pato pato = vendaPato.getPato();
+            Venda venda = vendaPato.getVenda();
+
+            PatoVendidoResponse patoVendido = PatoVendidoResponse.builder()
+                    .patoId(pato.getId())
+                    .nomeDoPato(pato.getNome())
+                    .precoUnitario(preco)
+                    .nomeDoCliente(venda.getCliente().getNome())
+                    .dataDaVenda(venda.getDataVenda())
+                    .build();
+            patosVendidos.add(patoVendido);
+        }
+        return patosVendidos;
     }
 }
