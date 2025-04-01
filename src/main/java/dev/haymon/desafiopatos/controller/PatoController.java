@@ -22,7 +22,7 @@ public class PatoController {
     @PostMapping
     public ResponseEntity<?> cadastrar(@RequestBody @Valid CadastroPatoRequest dto) {
         service.cadastrar(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build(); /// uri location
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")

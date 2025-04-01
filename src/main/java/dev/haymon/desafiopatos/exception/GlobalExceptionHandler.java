@@ -12,22 +12,83 @@ import java.util.Set;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionResponse> handleErrosDeValidacao(MethodArgumentNotValidException e) {
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<ExceptionResponse> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException e) {
+        int status = HttpStatus.NOT_FOUND.value();
 
-        int code = HttpStatus.UNPROCESSABLE_ENTITY.value();
+        return ResponseEntity
+                .status(status)
+                .body(ExceptionResponse.builder()
+                        .status(status)
+                        .message(e.getMessage())
+                        .validationErrors(new HashSet<>())
+                        .build());
+    }
+
+    @ExceptionHandler(RegistroDuplicadoException.class)
+    public ResponseEntity<ExceptionResponse> handleRegistroDuplicado(RegistroDuplicadoException e) {
+        int status = HttpStatus.BAD_REQUEST.value();
+
+        return ResponseEntity
+                .status(status)
+                .body(ExceptionResponse.builder()
+                        .status(status)
+                        .message(e.getMessage())
+                        .validationErrors(new HashSet<>())
+                        .build());
+    }
+
+    @ExceptionHandler(PatosNaoEncontradosException.class)
+    public ResponseEntity<ExceptionResponse> handlePatosNaoEncontrados(PatosNaoEncontradosException e) {
+        int status = HttpStatus.NOT_FOUND.value();
+        return ResponseEntity
+                .status(status)
+                .body(ExceptionResponse.builder()
+                        .status(status)
+                        .message(e.getMessage())
+                        .validationErrors(new HashSet<>())
+                        .build());
+    }
+
+    @ExceptionHandler(PatoVendidoException.class)
+    public ResponseEntity<ExceptionResponse> handlePatoVendido(PatoVendidoException e) {
+        int status = HttpStatus.CONFLICT.value();
+        return ResponseEntity
+                .status(status)
+                .body(ExceptionResponse.builder()
+                        .status(status)
+                        .message(e.getMessage())
+                        .validationErrors(new HashSet<>())
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ExceptionResponse> handleValidationErrors(MethodArgumentNotValidException e) {
+        int status = HttpStatus.UNPROCESSABLE_ENTITY.value();
         Set<String> erros = new HashSet<>();
         e.getBindingResult().getAllErrors()
                 .forEach(erro -> erros.add(erro.getDefaultMessage()));
-
         return ResponseEntity
-                .status(code)
+                .status(status)
                 .body(ExceptionResponse.builder()
-                        .status(code)
+                        .status(status)
                         .message("Erro de validação")
                         .validationErrors(erros)
                         .build()
                 );
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleGenericException(Exception ex) {
+        int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        return ResponseEntity
+                .status(status)
+                .body(ExceptionResponse.builder()
+                        .status(status)
+                        .message("Ocorreu um erro inesperado. Tente novamente mais tarde")
+                        .validationErrors(new HashSet<>())
+                        .build()
+                );
+    }
 }

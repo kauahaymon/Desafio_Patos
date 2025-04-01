@@ -2,6 +2,7 @@ package dev.haymon.desafiopatos.service;
 
 import dev.haymon.desafiopatos.controller.dto.AtualizarPatoRequest;
 import dev.haymon.desafiopatos.controller.dto.CadastroPatoRequest;
+import dev.haymon.desafiopatos.exception.EntidadeNaoEncontradaException;
 import dev.haymon.desafiopatos.model.Pato;
 import dev.haymon.desafiopatos.repository.PatoRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,10 +40,17 @@ public class PatoService {
             pato.setNome(dto.getNome());
             pato.setVendido(dto.isVendido());
             return repository.save(pato);
-        }).orElseThrow(); /// ex
+        }).orElseThrow(() -> getPatoNaoEncontrado(id));
     }
 
     public void deletar(Long id) {
+        if (!repository.existsById(id)) {
+            throw getPatoNaoEncontrado(id);
+        }
         repository.deleteById(id);
+    }
+
+    private static EntidadeNaoEncontradaException getPatoNaoEncontrado(Long id) {
+        return new EntidadeNaoEncontradaException("Pato com ID " + id);
     }
 }

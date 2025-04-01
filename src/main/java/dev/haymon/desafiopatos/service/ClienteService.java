@@ -1,6 +1,7 @@
 package dev.haymon.desafiopatos.service;
 
 import dev.haymon.desafiopatos.controller.dto.ClienteRequest;
+import dev.haymon.desafiopatos.exception.EntidadeNaoEncontradaException;
 import dev.haymon.desafiopatos.model.Cliente;
 import dev.haymon.desafiopatos.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class ClienteService {
             cliente.setNome(dto.getNome());
             cliente.setElegivelParaDesconto(dto.isElegivelParaDesconto());
             return repository.save(cliente);
-        }).orElseThrow(); /// ex
+        }).orElseThrow(() -> new EntidadeNaoEncontradaException("Cliente com ID " + id));
     }
 
     public void deletar(Long id) {
