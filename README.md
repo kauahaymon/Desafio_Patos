@@ -424,8 +424,7 @@ Você pode baixar a coleção do **Postman** para testar os endpoints da API.
 
 Você pode popular o banco de dados com dados fictícios para testes e visualização do sistema.
 
-Para isso, **Copie** o script localizado em `src/main/resources/db/sample-data.sql` e o **execute** diretamente em um query em seu banco de dados Postgres.
-
+Para isso, **Copie** o script localizado em [`src/main/resources/db/sample-data.sql`](https://github.com/kauahaymon/Desafio_Patos/blob/main/src/main/resources/db/sample-data.sql) e o **execute** diretamente em uma query no seu banco de dados Postgres.
 ## 🗓️ Cronograma completo
 
 ### **1. Preparação do Ambiente**
