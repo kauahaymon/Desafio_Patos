@@ -1,8 +1,10 @@
 package dev.haymon.desafiopatos.service;
 
 import dev.haymon.desafiopatos.controller.dto.VendedorRequest;
+import dev.haymon.desafiopatos.exception.EntidadeNaoEncontradaException;
 import dev.haymon.desafiopatos.model.Vendedor;
 import dev.haymon.desafiopatos.repository.VendedorRepository;
+import dev.haymon.desafiopatos.validator.VendedorValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class VendedorService {
 
     private final VendedorRepository repository;
+    private final VendedorValidator validator;
 
     public void cadastrar(VendedorRequest dto) {
         Vendedor novoVendedor = Vendedor.builder()
@@ -21,6 +24,7 @@ public class VendedorService {
                 .nome(dto.getNome())
                 .matricula(dto.getMatricula())
                 .build();
+        validator.validar(novoVendedor);
         repository.save(novoVendedor);
     }
 
@@ -38,10 +42,17 @@ public class VendedorService {
             vendedor.setCpf(dto.getCpf());
             vendedor.setMatricula(dto.getMatricula());
             return repository.save(vendedor);
-        }).orElseThrow(); /// ex
+        }).orElseThrow(() -> getVendedorNaoEncontrado(id));
     }
 
     public void deletar(Long id) {
+        if (!repository.existsById(id)) {
+            throw getVendedorNaoEncontrado(id);
+        }
         repository.deleteById(id);
+    }
+
+    private static EntidadeNaoEncontradaException getVendedorNaoEncontrado(Long id) {
+        return new EntidadeNaoEncontradaException("Vendedor com ID " + id + " não encontrado");
     }
 }

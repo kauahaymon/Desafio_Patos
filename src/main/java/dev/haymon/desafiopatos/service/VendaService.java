@@ -3,6 +3,9 @@ package dev.haymon.desafiopatos.service;
 import dev.haymon.desafiopatos.controller.dto.PatoVendidoResponse;
 import dev.haymon.desafiopatos.controller.dto.RankingVendedoresResponse;
 import dev.haymon.desafiopatos.controller.dto.RegistrarVendaRequest;
+import dev.haymon.desafiopatos.exception.EntidadeNaoEncontradaException;
+import dev.haymon.desafiopatos.exception.PatoVendidoException;
+import dev.haymon.desafiopatos.exception.PatosNaoEncontradosException;
 import dev.haymon.desafiopatos.model.*;
 import dev.haymon.desafiopatos.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -31,14 +34,15 @@ public class VendaService {
 
     @Transactional
     public void registrar(RegistrarVendaRequest dto) {
-        Cliente cliente = clienteRepository.findById(dto.getClienteId())
-                .orElseThrow(); /// ex not found
-        Vendedor vendedor = vendedorRepository.findById(dto.getVendedorId())
-                .orElseThrow(); /// ex not found
+
+        Cliente cliente = clienteRepository.findById(dto.getClienteId()).orElse(null);
+        Vendedor vendedor = vendedorRepository.findById(dto.getVendedorId()).orElse(null);
+
+        validarEntidades(dto, cliente, vendedor);
 
         List<Pato> patos = patoRepository.findAllById(dto.getPatosIds());
         if (patos.size() != dto.getPatosIds().size()) {
-            throw new RuntimeException("Um ou mais patos não foram encontrados");
+            throw new PatosNaoEncontradosException("Um ou mais patos não foram encontrados");
         }
 
         BigDecimal valorTotal = BigDecimal.ZERO;
@@ -53,7 +57,7 @@ public class VendaService {
 
         for (Pato pato: patos) {
             if (pato.isVendido()) {
-                throw new IllegalStateException("O pato com id " + pato.getId() + " já foi vendido");
+                throw new PatoVendidoException("O pato com ID " + pato.getId() + " já foi vendido");
             }
 
             BigDecimal preco = pato.calcularPreco();
@@ -77,6 +81,16 @@ public class VendaService {
 
         patoRepository.saveAll(patos);
         vendaRepository.save(novaVenda);
+    }
+
+    private static void validarEntidades(RegistrarVendaRequest dto, Cliente cliente, Vendedor vendedor) {
+        if (cliente == null && vendedor == null) {
+            throw new EntidadeNaoEncontradaException("Cliente e Vendedor não encontrados");
+        } else if (cliente == null) {
+            throw new EntidadeNaoEncontradaException("Cliente com ID " + dto.getClienteId() + " não encontrado");
+        } else if (vendedor == null) {
+            throw new EntidadeNaoEncontradaException("Vendedor com ID " + dto.getVendedorId() + " não encontrado");
+        }
     }
 
     public List<PatoVendidoResponse> listarPatosVendidos() {
