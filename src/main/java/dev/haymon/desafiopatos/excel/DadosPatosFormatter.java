@@ -38,10 +38,12 @@ public class DadosPatosFormatter {
             Sheet planilha,
             Pato pato,
             int linhaIndex,
-            VendaPato vendaPato
+            VendaPato vendaPato,
+            int nivel
     ) {
         Row linha = planilha.createRow(linhaIndex++);
-        linha.createCell(0).setCellValue(gerarNomeIdentado(pato));
+
+        linha.createCell(0).setCellValue(gerarNomeIdentado(pato, nivel));
 
         boolean vendido = pato.isVendido();
         linha.createCell(1).setCellValue(vendido ? "Indisponível" : "Disponível");
@@ -72,13 +74,7 @@ public class DadosPatosFormatter {
         planilha.setColumnWidth(4, 4000);
     }
 
-    private String gerarNomeIdentado(Pato pato) {
-        int nivel = 0;
-        Pato atual = pato.getMae();
-        while (atual != null) {
-            nivel++;
-            atual = atual.getMae();
-        }
+    private String gerarNomeIdentado(Pato pato, int nivel) {
         return "   ".repeat(nivel) + pato.getNome();
     }
 }
