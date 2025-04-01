@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -79,8 +80,14 @@ public class GlobalExceptionHandler {
                 );
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<String> handleNoResourceFoundException(NoResourceFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recurso não encontrado.");
+    }
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleGenericException(Exception ex) {
+    public ResponseEntity<ExceptionResponse> handleGenericException(Exception e) {
+        e.printStackTrace();
         int status = HttpStatus.INTERNAL_SERVER_ERROR.value();
         return ResponseEntity
                 .status(status)
