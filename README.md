@@ -147,33 +147,53 @@ Você pode popular o banco de dados com dados fictícios para testes e visualiza
 Para isso, **Copie** o script localizado em `src/main/resources/db/sample-data.sql` e o **execute** diretamente em um query em seu banco de dados Postgres.
 
 ## 🗓️ Cronograma completo
+### **1. Preparando o Ambiente**
 
-### Preparando o ambiente
+| **Atividade** | **Tempo Estimado** |
+| --- | --- |
+| Análise e revisão de requisitos | 2h |
+| Modelagem do banco de dados | 4h |
+| Configuração do ambiente de desenvolvimento | 2h |
+| Criação das tabelas com Migration (Flyway) | 3h |
 
-1. Análise e revisão de requisitos - 2h
-2. Modelagem do banco de dados - 4h
-3. Configuração do ambiente de desenvolvimento - 2h
-4. Criação das tabelas com Migration(Flyway) - 3h
+### **2. Desenvolvimento da API**
 
-### Durante o Desenvolvimento
+### **2.1 Criação das Entidades e Funcionalidades**
 
-1. Criação das entidades mapeadas - 1h
-2. Implementação das funcionalidades da API - 6h
-    1. CRUD de Pato (com mãe, filhos, preço conforme regra). - 2h
-    2. CRUD de Cliente (Nome e elegibilidade para desconto) - 2h
-    3. CRUD de Vendedor (validação CPF e matrícula únicos). - 2h
-3. Implementação de cadastro de vendas e regras de négocio - 4h
-4. Listagem de todos os patos vendidos - 1h
-5. Ranking de vendedores com maior Valor Total de Vendas - 4h
-6. Implementação de filtro por período - 2h
-7. Implementação de geração de relatórios - 6h
-    1. Ler a documentação, entender como funciona a Biblioteca Apache POI - 2h
-    2. Criar a primeira implementação de relatório de Patos - 3h
-    3. Seperar responsabilidades e aplicar princípios SRP - 1h
-8. Aplicar validações com Spring Validation - 1h
-9. Tratar exções com Exception Handler- 2h
-10. Criar dados fictícios para popular a base de dados (Opcional) - 1h
-11. Fazer testes - 2h
+| **Atividade** | **Tempo Estimado** |
+| --- | --- |
+| Criação das entidades mapeadas | 1h |
+| **Implementação das funcionalidades da API** | **6h** |
+| - CRUD de Pato (com mãe, filhos, preço conforme regra) | 2h |
+| - CRUD de Cliente (Nome e elegibilidade para desconto) | 2h |
+| - CRUD de Vendedor (validação CPF e matrícula únicos) | 2h |
+
+### **2.2 Funcionalidades Adicionais**
+
+| **Atividade** | **Tempo Estimado** |
+| --- | --- |
+| Implementação de cadastro de vendas e regras de negócio | 4h |
+| Listagem de todos os patos vendidos | 1h |
+| Ranking de vendedores com maior valor total de vendas | 4h |
+| Implementação de filtro por período | 2h |
+
+### **3. Geração de Relatórios**
+
+| **Atividade** | **Tempo Estimado** |
+| --- | --- |
+| **Implementação de geração de relatórios** | **6h** |
+| - Ler a documentação, entender como funciona a Biblioteca Apache POI | 2h |
+| - Criar a primeira implementação de relatório de Patos | 3h |
+| - Separar responsabilidades e aplicar princípios SRP | 1h |
+
+### **4. Validações, Exceções e Testes**
+
+| **Atividade** | **Tempo Estimado** |
+| --- | --- |
+| Aplicar validações com Spring Validation | 1h |
+| Tratar exceções com Exception Handler | 2h |
+| Criar dados fictícios para popular a base de dados (Opcional) | 1h |
+| Fazer testes | 2h |
 
 ## 👨‍💻 Desenvolvedor
 
