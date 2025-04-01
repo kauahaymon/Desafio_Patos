@@ -292,7 +292,7 @@
 
     - **Prévia do Relatório de Patos:**
 
-      ![ralatorio planilha gerada.png](attachment:7c8c0aaf-ebce-499f-9322-a210936900bc:ralatorio_planilha_gerada.png)
+      ![Prévia](https://github.com/kauahaymon/Desafio_Patos/blob/main/src/main/resources/static/previa_relatorio_patos.png)
 
 
 ## ⚠️ Erros Comuns de Validação
