@@ -14,6 +14,20 @@ services:
       - spring-network
     restart: unless-stopped
 
+  app:
+    build: .
+    container_name: desafio_patos_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_patos:5432/patos_database
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - postgres
+    networks:
+      - spring-network
+
 networks:
   spring-network:
     driver: bridge
