@@ -14,7 +14,7 @@
 - Lombok
 - Docker
 
-## 📊 Funcionalidades da API
+## 📌 Funcionalidades da API
 
 - [x]  Cadastro de **Patos** com nome, mãe, filhos e cálculo de preço conforme regras
 - [x]  Cadastro de **Clientes**, incluindo opção de desconto
@@ -24,7 +24,43 @@
 - [x]  **Geração de Relatórios** (Excel)
 - [x]  **Ranking de Vendedores** por valor total vendido com filtro por período
 
-## 🧠 Boas práticas adotadas
+## **📜 Documentação dos Endpoints**
+
+### 🦆 Patos
+
+- `POST /patos` - Cria um novo **Pato.**
+- `GET /patos/{id}` - Obtem os detalhes de um **Pato** pelo ID.
+- `PUT /patos/{id}` - Atualiza os dados de um **Pato existente** pelo ID.
+- `DELETE /patos/{id}` - Remove um **Pato** pelo ID.
+
+### 👥 Clientes
+
+- `POST /clientes` - Cria um novo **Cliente.**
+- `GET /clientes/{id}` - Obtem os detalhes de um **Cliente** pelo ID.
+- `PUT /clientes/{id}` - Atualiza os dados de um **Cliente** **existente** pelo ID.
+- `DELETE /clientes/{id}` - Remove um **Cliente** pelo ID.
+
+### 👨‍💼 Vendedores
+
+- `POST /vendedores`- Cria um novo **Vendedor.**
+- `GET /vendedores` - Obtem uma lista com todos os **Vendedores** cadastrados.
+- `GET /vendedores/{id}` - Obtem os detalhes de um **Vendedor** pelo ID.
+- `PUT /vendedores/{id}` - Atualiza os dados de um **Vendedor existente** pelo ID.
+- `DELETE /vendedores/{id}` - Remove um **Vendedor** pelo ID.
+
+### 💸 Vendas
+
+- `POST /vendas` - Registra uma nova **Venda.**
+- `GET /vendas/patos-vendidos` - Obtem uma lista com todos os **Patos Vendidos.**
+- `GET /vendas/ranking-vendedores` - Obtem uma lista com o ranking de Vendedores, do **maior valor total vendido** para o **menor.**
+    - Parâmetros opcionais: `dataInicio`, `dataFim` - Formato ISO: `yyyy-mm-dd`
+    - `GET /vendas/ranking-vendedores?dataInicio={dataInicio}&dataFim={dataFim}`
+
+### 📑 Relatórios
+
+- `GET /relatorios/patos` - Gera e baixa automaticamente um relatório detalhado dos patos cadastrados e vendidos no formato `.xslx` (Excel)
+
+## 🛠️ Boas práticas adotadas
 
 - [x]  Padrão de projeto MVC (Model-View-Controller)
 - [x]  Princípios SOLID
@@ -34,48 +70,12 @@
 - [x]  Mapeamento entre entidades e DTOs com **Mappers**
 - [x]  Logs organizados com SLF4J
 
-## **📜 Documentação dos Endpoints**
-
-### Patos
-
-- `POST /patos` - Cria um novo **Pato.**
-- `GET /patos/{id}` - Obtem os detalhes de um **Pato** pelo ID.
-- `PUT /patos/{id}` - Atualiza os dados de um **Pato existente** pelo ID.
-- `DELETE /patos/{id}` - Remove um **Pato** pelo ID.
-
-### Clientes
-
-- `POST /clientes` - Cria um novo **Cliente.**
-- `GET /clientes/{id}` - Obtem os detalhes de um **Cliente** pelo ID.
-- `PUT /clientes/{id}` - Atualiza os dados de um **Cliente** **existente** pelo ID.
-- `DELETE /clientes/{id}` - Remove um **Cliente** pelo ID.
-
-### Vendedores
-
-- `POST /vendedores`- Cria um novo **Vendedor.**
-- `GET /vendedores` - Obtem uma lista com todos os **Vendedores** cadastrados.
-- `GET /vendedores/{id}` - Obtem os detalhes de um **Vendedor** pelo ID.
-- `PUT /vendedores/{id}` - Atualiza os dados de um **Vendedor existente** pelo ID.
-- `DELETE /vendedores/{id}` - Remove um **Vendedor** pelo ID.
-
-### Vendas
-
-- `POST /vendas` - Registra uma nova **Venda.**
-- `GET /vendas/patos-vendidos` - Obtem uma lista com todos os **Patos Vendidos.**
-- `GET /vendas/ranking-vendedores` - Obtem uma lista com o ranking de Vendedores, do **maior valor total vendido** para o **menor.**
-    - Parâmetros opcionais: `dataInicio`, `dataFim` - Formato ISO: `yyyy-mm-dd`
-    - `GET /vendas/ranking-vendedores?dataInicio={dataInicio}&dataFim={dataFim}`
-
-### Relatórios
-
-- `GET /relatorios/patos` - Gera e baixa automaticamente um relatório detalhado dos patos cadastrados e vendidos no formato `.xslx` (Excel)
-
 ## ⚙ Como Iniciar a API
 
 ### **🌀 Clonar o repositório**
 
 ```
-https://github.com/kauahaymon/Desafio_Patos.git
+git clone https://github.com/kauahaymon/Desafio_Patos.git
 ```
 
 **Navegue até o Diretório do Projeto**:
@@ -147,7 +147,8 @@ Você pode popular o banco de dados com dados fictícios para testes e visualiza
 Para isso, **Copie** o script localizado em `src/main/resources/db/sample-data.sql` e o **execute** diretamente em um query em seu banco de dados Postgres.
 
 ## 🗓️ Cronograma completo
-### **1. Preparando o Ambiente**
+
+### **1. Preparação do Ambiente**
 
 | **Atividade** | **Tempo Estimado** |
 | --- | --- |
